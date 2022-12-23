@@ -202,6 +202,16 @@ class OrthogonalRNN(nn.Module):
 
         return out, out
 
+class Diag(nn.Module):
+    def __init__(self, dim):
+        super().__init__()
+        self.dim = dim
+        self.weights = torch.ones(dim, 1, 1)
+
+    def forward(self, x):
+        #result = torch.multiply(self.weights, x) 
+        result = self.weights * x
+        return result
 
 # taken and modified from https://github.com/Lezcano/expRNN/blob/master/orthogonal.py
 class modrelu(nn.Module):
